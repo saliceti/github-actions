@@ -1,0 +1,14 @@
+name: Test schedule workflow
+
+on:
+    schedule:
+    - cron:  '* * * * *'
+
+jobs:
+    test_schedule:
+        name: Test schedule job
+        runs-on: ubuntu-latest
+
+        steps:
+        - name: Test schedule step
+          run: date
