@@ -40,6 +40,10 @@ jobs:
         echo test, and deploy your project.
         echo "Let's go to ${{ github.event.client_payload.location }}"
 
+    - uses: hashicorp/setup-terraform@v1
+      with:
+        terraform_version: 0.12.25
+
     - name: Check terraform version
       run: |
         which terraform
