@@ -7,8 +7,11 @@ name: CI
 on:
   repository_dispatch:
     types: manual-trigger
-  schedule:
-    - cron: "57 16 * * *"
+  # schedule:
+  #   - cron: "57 16 * * *"
+  push:
+    branches:
+      master
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -37,4 +40,8 @@ jobs:
         echo test, and deploy your project.
         echo "Let's go to ${{ github.event.client_payload.location }}"
 
-
+    - name: Check terraform version
+      run: |
+        which terraform
+        ls -l /usr/local/bin/terraform*
+        terraform version
