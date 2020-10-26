@@ -49,3 +49,6 @@ jobs:
         which terraform
         ls -l /usr/local/bin/terraform*
         terraform version
+
+    - name: Check Bash version
+      run: bash --version
