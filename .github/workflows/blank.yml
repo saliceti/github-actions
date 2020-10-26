@@ -52,3 +52,8 @@ jobs:
 
     - name: Check Bash version
       run: bash --version
+
+    - name: Check empty env
+      run: |
+        echo IDONTEXIST=AAA${IDONTEXIST}BBB
+        echo IDONTEXIST=AAA${{ env.IDONTEXIST }}BBB
