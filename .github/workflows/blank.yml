@@ -30,6 +30,12 @@ jobs:
     - name: Run a one-line script
       run: echo Hello, world!
 
+    # Runs a single command using the runners shell
+    - name: Print sha etc
+      run: |
+        echo {{github.sha}}
+        echo {{github.ref}}
+
     # # Error
     # - name: Error on purpose
     #   run: date
