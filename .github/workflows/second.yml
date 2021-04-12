@@ -12,6 +12,10 @@ on:
       tag:
         description: Docker tag
         required: true
+  push:
+    tags:
+    - staging
+    - production
 
 jobs:
   # This workflow contains a single job called "build"

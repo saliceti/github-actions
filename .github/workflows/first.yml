@@ -30,6 +30,7 @@ jobs:
       uses: mathieudutour/github-tag-action@v5.4
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
+        custom_tag: staging
 
     # Runs a single command using the runners shell
     - name: Print sha etc
@@ -42,7 +43,7 @@ jobs:
       uses: benc-uk/workflow-dispatch@v1.1
       with:
         token: ${{ secrets.PERSONAL_TOKEN }}
-        ref: ${{ steps.tag_version.outputs.new_tag }}
+        ref: staging
         workflow: Second # Workflow name
         inputs: '{"environment": "staging", "tag": "abcd123"}'
 
@@ -52,7 +53,7 @@ jobs:
       with:
         token: ${{ secrets.PERSONAL_TOKEN }}
         checkName: second-job # Job name within workflow
-        ref: ${{ steps.tag_version.outputs.new_tag }}
+        ref: staging
         timeoutSeconds: 720
         intervalSeconds: 15
 
