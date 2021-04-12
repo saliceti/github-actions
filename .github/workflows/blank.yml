@@ -10,8 +10,9 @@ on:
   # schedule:
   #   - cron: "57 16 * * *"
   push:
-    branches:
-      master
+    tags:
+      - staging
+      - production
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -29,31 +30,31 @@ jobs:
     - name: Run a one-line script
       run: echo Hello, world!
 
-    # Error
-    - name: Error on purpose
-      run: date
+    # # Error
+    # - name: Error on purpose
+    #   run: date
 
-    # Runs a set of commands using the runners shell
-    - name: Run a multi-line script
-      run: |
-        echo Add other actions to build,
-        echo test, and deploy your project.
-        echo "Let's go to ${{ github.event.client_payload.location }}"
+    # # Runs a set of commands using the runners shell
+    # - name: Run a multi-line script
+    #   run: |
+    #     echo Add other actions to build,
+    #     echo test, and deploy your project.
+    #     echo "Let's go to ${{ github.event.client_payload.location }}"
 
-    - uses: hashicorp/setup-terraform@v1
-      with:
-        terraform_version: 0.12.25
+    # - uses: hashicorp/setup-terraform@v1
+    #   with:
+    #     terraform_version: 0.12.25
 
-    - name: Check terraform version
-      run: |
-        which terraform
-        ls -l /usr/local/bin/terraform*
-        terraform version
+    # - name: Check terraform version
+    #   run: |
+    #     which terraform
+    #     ls -l /usr/local/bin/terraform*
+    #     terraform version
 
-    - name: Check Bash version
-      run: bash --version
+    # - name: Check Bash version
+    #   run: bash --version
 
-    - name: Check empty env
-      run: |
-        echo IDONTEXIST=AAA${IDONTEXIST}BBB
-        echo IDONTEXIST=AAA${{ env.IDONTEXIST }}BBB
+    # - name: Check empty env
+    #   run: |
+    #     echo IDONTEXIST=AAA${IDONTEXIST}BBB
+    #     echo IDONTEXIST=AAA${{ env.IDONTEXIST }}BBB
