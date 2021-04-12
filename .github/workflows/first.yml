@@ -1,6 +1,6 @@
 # This is a basic workflow to help you get started with Actions
 
-name: CI
+name: First
 
 # Controls when the action will run. Triggers the workflow on push or pull request
 # events but only for the master branch
@@ -41,6 +41,24 @@ jobs:
         echo ${{github.sha}}
         echo ${{github.ref}}
         echo ${{ steps.tag_version.outputs.new_tag }}
+
+    - name: Trigger second Workflow
+      uses: benc-uk/workflow-dispatch@v1.1
+      with:
+        token: ${{ secrets.PERSONAL_TOKEN }}
+        ref: ${{ steps.tag_version.outputs.new_tag }}
+        workflow: Second # Workflow name
+        inputs: '{"environment": "staging", "tag": "abcd123"}'
+
+    - name: Wait for Deploy App Workflow for review
+      id: wait_for_deploy_app
+      uses: fountainhead/action-wait-for-check@v1.0.0
+      with:
+        token: ${{ secrets.PERSONAL_TOKEN }}
+        checkName: second-job # Job name within workflow
+        ref: ${{ steps.tag_version.outputs.new_tag }}
+        timeoutSeconds: 720
+        intervalSeconds: 15
 
     # # Error
     # - name: Error on purpose

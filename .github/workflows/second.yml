@@ -1,0 +1,32 @@
+
+name: Second
+
+# Controls when the action will run. Triggers the workflow on push or pull request
+# events but only for the master branch
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: Environment
+        required: true
+      tag:
+        description: Docker tag
+        required: true
+
+jobs:
+  # This workflow contains a single job called "build"
+  second-job:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+
+    # Runs a single command using the runners shell
+    - name: Run a one-line script
+      run: echo Hello, world!
+
+    - name: Print sha etc
+      run: |
+        echo ${{github.sha}}
+        echo ${{github.ref}}
