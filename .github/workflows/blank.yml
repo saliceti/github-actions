@@ -10,9 +10,8 @@ on:
   # schedule:
   #   - cron: "57 16 * * *"
   push:
-    tags:
-      - staging
-      - production
+    branches:
+    - master
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -30,11 +29,18 @@ jobs:
     - name: Run a one-line script
       run: echo Hello, world!
 
+    - name: Bump version and push tag
+      id: tag_version
+      uses: mathieudutour/github-tag-action@v5.4
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+
     # Runs a single command using the runners shell
     - name: Print sha etc
       run: |
         echo ${{github.sha}}
         echo ${{github.ref}}
+        echo ${{ steps.tag_version.outputs.new_tag }}
 
     # # Error
     # - name: Error on purpose
