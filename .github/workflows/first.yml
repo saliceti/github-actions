@@ -31,7 +31,7 @@ jobs:
       run: echo ${{matrix.iteration}}
 
     - name: Wait
-      run: sleep 1
+      run: sleep 30
 
     - name: Prints the date
       run: date
