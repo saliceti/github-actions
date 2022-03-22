@@ -20,7 +20,6 @@ jobs:
       run: sleep 1
 
   second_job:
-    concurrency: second
     runs-on: ubuntu-latest
     needs: [first_job]
     strategy:
@@ -30,6 +29,9 @@ jobs:
     steps:
     - name: Prints the iteration
       run: echo ${{matrix.iteration}}
+
+    - name: Wait
+      run: sleep 30
 
     - name: Prints the date
       run: date
